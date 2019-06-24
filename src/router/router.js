@@ -7,27 +7,35 @@ Vue.use(VueRouter)
 import manage from '../pages/manage.vue'
 import home from '../pages/home.vue'
 import userInfo from '../pages/userInfo.vue'
+import orderInfo from '../pages/orderInfo.vue'
 
 const routes = [
-    {path: '/', redirect: '/manage'},
-    {
-        path: '/manage', 
-        component: manage,
-        name: '',
-        children:[{
-            path: '',
-            component: home
-        },{
-            path: '/userInfo',
-            component: userInfo,
-            meta: ['YOU递','用户信息']
-        }
-        ]
-    },
-];
+  { path: '/', redirect: '/manage' },
+  {
+    path: '/manage',
+    component: manage,
+    name: '',
+    children: [
+      {
+        path: '',
+        component: home
+      },
+      {
+        path: '/userInfo',
+        component: userInfo,
+        meta: ['YOU递', '用户信息']
+      },
+      {
+        path: '/orderInfo',
+        component: orderInfo,
+        meta: ['YOU递', '订单信息']
+      }
+    ]
+  }
+]
 
 const router = new VueRouter({
-    routes
-});
+  routes
+})
 
-export default router;
+export default router
