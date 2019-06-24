@@ -11,7 +11,7 @@
     export default {
         name: "HeadTop",
         mounted() {
-                console.log(this.$route );
+                window.console.log(this.$route );
         }
     }
 </script>

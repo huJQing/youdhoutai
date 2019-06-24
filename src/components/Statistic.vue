@@ -5,7 +5,8 @@
                 {{title}}
             </div>
             <div class="statistic-value" :style="{color: valueColor}">
-                {{value | NumFormat(false)}}
+                {{value | NumFormat(numFormat)}} 
+                <span class="suffix">{{suffix !=='' ? suffix : ''}}</span>
             </div>
         </el-card>
     </div>
@@ -17,7 +18,16 @@
             return {
             }
         },
-        props: ['title', 'value','backgroundColor','titleColor','valueColor'],
+        /**
+         *title: 标题
+         *value：数值
+         *backgroundColor：背景颜色
+         *titleColor： 标题文字颜色
+         *valueColor：数值文字颜色
+         *numFormat：是否格式化数值
+         *suffix： 后缀
+         * */
+        props: ['title', 'value','backgroundColor','titleColor','valueColor', 'numFormat', 'suffix'],
     }
 </script>
 
@@ -39,5 +49,10 @@
         line-height: 60px;
         font-size: 36px;
         color: #fff;
+    }
+    .suffix{
+        font-size: 20px;
+        position: relative;
+        top: -2px;
     }
 </style>

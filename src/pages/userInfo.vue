@@ -130,7 +130,7 @@
         },
         methods: {
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                window.console.log(`当前页: ${val}`);
             }
         }
     }
