@@ -8,6 +8,8 @@ import manage from '../pages/manage.vue'
 import home from '../pages/home.vue'
 import userInfo from '../pages/userInfo.vue'
 import orderInfo from '../pages/orderInfo.vue'
+import transactionInfo from '../pages/transactionInfo.vue'
+import goodsInfo from '../pages/goodsInfo.vue'
 
 const routes = [
   { path: '/', redirect: '/manage' },
@@ -29,6 +31,16 @@ const routes = [
         path: '/orderInfo',
         component: orderInfo,
         meta: ['YOU递', '订单信息']
+      },
+      {
+        path: '/transactionInfo',
+        component: transactionInfo,
+        meta: ['YOU递', '交易信息']
+      },
+      {
+        path: '/goodsInfo',
+        component: goodsInfo,
+        meta: ['YOU递', '商品信息']
       }
     ]
   }

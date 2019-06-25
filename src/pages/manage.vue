@@ -25,6 +25,7 @@
             </template>
             <el-menu-item index="userInfo">用户信息</el-menu-item>
             <el-menu-item index="orderInfo">订单信息</el-menu-item>
+            <el-menu-item index="transactionInfo">交易信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="3">
@@ -32,7 +33,6 @@
               <i class="el-icon-menu"></i>YOU转
             </template>
             <el-menu-item index="goodsInfo">商品信息</el-menu-item>
-            <el-menu-item index="storeInfo">个人小店信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="4">

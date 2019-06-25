@@ -108,18 +108,23 @@ export default {
       this.loading = true
       getAllUserInfo({
         m: 'user',
-        a: 'allUserInfo',
+        a: 'getAllUserInfo',
         pageIndex: this.listQuery.pageIndex,
         pageSize: this.listQuery.pageSize,
         sortKey: this.listQuery.sortKey,
         sortValue: this.listQuery.sortValue,
         selectedKey: this.listQuery.selectedKey,
         selectedValue: this.listQuery.selectedValue
-      }).then(res => {
-        this.listQuery.total = res.total - 0
-        this.listQuery.tableData = JSON.parse(res.userInfo)
-        this.loading = false
       })
+        .then(res => {
+          this.listQuery.total = res.total - 0
+          this.listQuery.tableData = JSON.parse(res.userInfo)
+          this.loading = false
+        })
+        .catch(() => {
+          this.$message.error('查询数据失败！')
+          this.loading = false
+        })
     },
     //改变页码回调
     handleCurrentChange(val) {

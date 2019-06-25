@@ -1,7 +1,7 @@
 <template>
-  <div id="user-info">
+  <div id="order-info">
     <head-top></head-top>
-    <div class="user-container">
+    <div class="order-container">
       <el-row>
         <el-col :span="12" :offset="12">
           <el-input
@@ -15,9 +15,9 @@
               placeholder="请选择"
               style="width:20%"
             >
-              <el-option label="ID" value="id"></el-option>
               <el-option label="发单者学号" value="owner"></el-option>
               <el-option label="接单者学号" value="worker"></el-option>
+              <el-option label="订单ID" value="id"></el-option>
               <el-option label="发布时间" value="start"></el-option>
               <el-option label="收货人姓名" value="name"></el-option>
               <el-option label="内部订单编号" value="transaction_id"></el-option>
@@ -27,7 +27,7 @@
               <el-option label="取货号" value="number"></el-option>
               <el-option label="答谢方式" value="repay"></el-option>
             </el-select>
-            <el-button slot="append" icon="el-icon-search" @click="getAllUserInfoData()"></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="getAllOrderInfoData()"></el-button>
           </el-input>
         </el-col>
       </el-row>
@@ -79,13 +79,13 @@
         <el-table-column label="发布时间" width="140px" prop="start" sortable="custom"></el-table-column>
         <el-table-column label="起点" prop="delivery" sortable="custom"></el-table-column>
         <el-table-column label="终点" prop="location" sortable="custom"></el-table-column>
-        <el-table-column label="发布者" prop="owner" sortable="custom"></el-table-column>
+        <el-table-column label="发单者" prop="owner" sortable="custom"></el-table-column>
         <el-table-column label="接单者" prop="worker" sortable="custom"></el-table-column>
         <el-table-column label="是否被接单" prop="status" sortable="custom"></el-table-column>
         <el-table-column label="操作" width="150px">
           <template slot-scope="scope">
             <el-button size="mini" @click="editUserInfo(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="deleteUser(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini" type="danger" @click="deleteOrder(scope.$index, scope.row)">取消</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -98,13 +98,47 @@
         class="pagination"
         @current-change="handleCurrentChange"
       ></el-pagination>
+
+      <el-dialog title="修改订单信息" :visible.sync="dialogFormVisible" top="20px">
+        <el-form :model="selectTable">
+          <el-form-item label="ID" label-width="100px">
+            <el-input v-model="selectTable.id" auto-complete="off" :disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item label="起点" label-width="100px">
+            <el-input v-model="selectTable.delivery"></el-input>
+          </el-form-item>
+          <el-form-item label="终点" label-width="100px">
+            <el-input v-model="selectTable.location"></el-input>
+          </el-form-item>
+          <el-form-item label="发单者学号" label-width="100px">
+            <el-input v-model="selectTable.owner"></el-input>
+          </el-form-item>
+          <el-form-item label="接单者学号" label-width="100px">
+            <el-input v-model="selectTable.worker"></el-input>
+          </el-form-item>
+          <el-form-item label="取货号" label-width="100px">
+            <el-input v-model="selectTable.number"></el-input>
+          </el-form-item>
+          <el-form-item label="红包金额" label-width="100px">
+            <el-input v-model="selectTable.price"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="100px">
+            <el-input v-model="selectTable.remark"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="updateUserInfo()">保 存</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
 import HeadTop from '../components/HeadTop.vue'
-import { getAllOrderInfo } from '../request/api'
+import { getAllOrderInfo, updateOrderInfo, deleteOrder } from '../request/api'
+
 export default {
   data() {
     return {
@@ -116,9 +150,11 @@ export default {
         total: 0, //总条目数
         sortKey: 'id', //排序列名
         sortValue: 'desc', //升序还是降序
-        selectedKey: 'id', //搜索列名
+        selectedKey: 'owner', //搜索列名
         selectedValue: '' //搜索关键词
-      }
+      },
+      dialogFormVisible: false,
+      selectTable: {}
     }
   },
   components: {
@@ -126,7 +162,7 @@ export default {
   },
   methods: {
     //获取所有订单数据
-    getAllUserInfoData() {
+    getAllOrderInfoData() {
       this.loading = true
       getAllOrderInfo({
         m: 'order',
@@ -146,6 +182,7 @@ export default {
         })
         .catch(() => {
           this.$message.error('查询数据失败！')
+          this.loading = false
         })
     },
     //改变排序回调
@@ -158,26 +195,72 @@ export default {
         this.listQuery.sortKey = column.prop
         this.listQuery.sortValue = 'asc'
       }
-      this.getAllUserInfoData()
+      this.getAllOrderInfoData()
     },
     //改变页码回调
     handleCurrentChange(val) {
       this.listQuery.pageIndex = val
-      this.getAllUserInfoData()
+      this.getAllOrderInfoData()
     },
-    //格式化快递类型
+    //编辑订单信息
+    editUserInfo(index, row) {
+      this.dialogFormVisible = true
+      this.selectTable = row
+      window.console.log(index, row)
+    },
+    //取消订单
+    deleteOrder(index, row) {
+      window.console.log(index, row)
+      deleteOrder({
+        m: 'order',
+        a: 'deleteOrder',
+        id: row.id
+      }).then(res => {
+        window.console.log(res)
+        if (res.status == 'SUCCESS') {
+          this.$message.success('取消订单成功，红包已退回发单者账户')
+          this.dialogFormVisible = false
+          this.getAllOrderInfoData()
+        } else {
+          this.$message.error('取消订单失败！')
+        }
+      })
+    },
+    //更新订单信息
+    updateUserInfo() {
+      updateOrderInfo({
+        m: 'order',
+        a: 'updateOrderInfo',
+        id: this.selectTable.id,
+        delivery: this.selectTable.delivery,
+        location: this.selectTable.location,
+        owner: this.selectTable.owner,
+        worker: this.selectTable.worker,
+        number: this.selectTable.number,
+        price: this.selectTable.price,
+        remark: this.selectTable.remark
+      }).then(res => {
+        if (res.status === 'SUCCESS') {
+          this.$message.success('保存订单信息成功！')
+          this.dialogFormVisible = false
+        } else {
+          this.$message.error('保存订单信息失败！')
+        }
+      })
+    },
+    //格式化快递类型数据
     formatterOrderType(row) {
       return row.type == 1 ? '啥都递' : '领快递'
     }
   },
   mounted() {
-    this.getAllUserInfoData()
+    this.getAllOrderInfoData()
   }
 }
 </script>
 
 <style>
-.user-container {
+.order-container {
   padding: 30px 80px;
   position: relative;
 }
