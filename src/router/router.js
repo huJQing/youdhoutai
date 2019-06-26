@@ -10,6 +10,7 @@ import userInfo from '../pages/userInfo.vue'
 import orderInfo from '../pages/orderInfo.vue'
 import transactionInfo from '../pages/transactionInfo.vue'
 import goodsInfo from '../pages/goodsInfo.vue'
+import commentInfo from '../pages/commentInfo.vue'
 
 const routes = [
   { path: '/', redirect: '/manage' },
@@ -41,6 +42,11 @@ const routes = [
         path: '/goodsInfo',
         component: goodsInfo,
         meta: ['YOU递', '商品信息']
+      },
+      {
+        path: '/commentInfo',
+        component: commentInfo,
+        meta: ['YOU递社区', '用户发布信息']
       }
     ]
   }

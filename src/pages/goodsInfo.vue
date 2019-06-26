@@ -1,7 +1,7 @@
 <template>
-  <div id="order-info">
+  <div id="goods-info">
     <head-top></head-top>
-    <div class="order-container">
+    <div class="goods-container">
       <el-row>
         <el-col :span="12" :offset="12">
           <el-input
@@ -273,7 +273,10 @@ export default {
 </script>
 
 <style>
-.order-container {
+#goods-info {
+  margin-bottom: 80px;
+}
+.goods-container {
   padding: 30px 80px;
   position: relative;
 }

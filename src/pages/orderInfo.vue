@@ -260,6 +260,9 @@ export default {
 </script>
 
 <style>
+#order-info {
+  margin-bottom: 80px;
+}
 .order-container {
   padding: 30px 80px;
   position: relative;

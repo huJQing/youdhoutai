@@ -42,3 +42,9 @@ export const updateItemInfo = p => post(url, p)
 
 /*删除商品*/
 export const deleteItem = p => post(url, p)
+
+/*获取所有评论数据 */
+export const getAllCommentInfo = p => post(url, p)
+
+/*删除评论*/
+export const deleteComment = p => post(url, p)

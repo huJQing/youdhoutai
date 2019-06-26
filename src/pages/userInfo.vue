@@ -194,6 +194,9 @@ export default {
 </script>
 
 <style>
+#user-info {
+  margin-bottom: 80px;
+}
 .user-container {
   padding: 30px 80px;
   position: relative;

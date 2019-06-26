@@ -16,7 +16,7 @@
           router
         >
           <el-menu-item index="manage">
-            <i class="el-icon-location"></i>首页
+            <i class="el-icon-date"></i>首页
           </el-menu-item>
 
           <el-submenu index="YOUd">
@@ -30,20 +30,20 @@
 
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-menu"></i>YOU转
+              <i class="el-icon-goods"></i>YOU转
             </template>
             <el-menu-item index="goodsInfo">商品信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="4">
             <template slot="title">
-              <i class="el-icon-menu"></i>YOU趣
+              <i class="el-icon-tickets"></i>YOU递社区
             </template>
             <el-menu-item index="commentInfo">用户发布信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main style="padding: 0;" id="main">
+      <el-main id="main">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -75,7 +75,8 @@ export default {
 #manage {
   height: 100%;
 }
-/*#main{
-        min-width: 1250px;
-    }*/
+#main {
+  min-width: 1250px;
+  padding: 0;
+}
 </style>

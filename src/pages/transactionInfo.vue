@@ -120,6 +120,9 @@ export default {
 </script>
 
 <style>
+#transition-info {
+  margin-bottom: 80px;
+}
 .transition-container {
   padding: 30px 80px;
   position: relative;

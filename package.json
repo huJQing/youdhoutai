@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@antv/g2": "^3.5.8-beta.1",
     "@types/qs": "^6.5.3",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
