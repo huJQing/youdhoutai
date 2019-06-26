@@ -13,6 +13,9 @@ export const getTodayStatistic = () =>
 export const getMonthStatistic = () =>
   post(url, { m: 'statistic', a: 'monthStatistic' })
 
+/*获取每日订单数据统计*/
+export const getOrderStatistic = p => post(url, p)
+
 /*获取所有用户数据 */
 export const getAllUserInfo = p => post(url, p)
 

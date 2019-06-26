@@ -64,13 +64,20 @@
         </el-col>
       </el-row>
     </div>
+
+    <visitor-pie :orderStatistic="orderStatistic"></visitor-pie>
   </div>
 </template>
 
 <script>
 import HeadTop from '../components/HeadTop.vue'
+import VisitorPie from '../components/VisitorPie.vue'
 import Statistic from '../components/Statistic.vue'
-import { getTodayStatistic, getMonthStatistic } from '../request/api'
+import {
+  getTodayStatistic,
+  getMonthStatistic,
+  getOrderStatistic
+} from '../request/api'
 
 export default {
   data() {
@@ -83,12 +90,14 @@ export default {
         { color: '#F56C6C' }
       ],
       todayStatistic: {},
-      monthStatistic: {}
+      monthStatistic: {},
+      orderStatistic: []
     }
   },
   components: {
     HeadTop,
-    Statistic
+    Statistic,
+    VisitorPie
   },
   mounted() {
     getTodayStatistic().then(res => {
@@ -97,6 +106,13 @@ export default {
     getMonthStatistic().then(res => {
       window.console.log(res)
       this.monthStatistic = res
+    })
+    getOrderStatistic({
+      m: 'statistic',
+      a: 'getOrderStatistic',
+      days: 10
+    }).then(res => {
+      this.orderStatistic = res.reverse()
     })
   }
 }
