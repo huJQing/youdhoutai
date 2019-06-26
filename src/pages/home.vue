@@ -65,7 +65,32 @@
       </el-row>
     </div>
 
-    <visitor-pie :orderStatistic="orderStatistic"></visitor-pie>
+    <el-tabs v-model="activeName" class="data-statistics" type="border-card">
+      <el-tab-pane label="每日订单走势" name="orderStatistic">
+        <visitor-pie
+          :datas="orderStatistic"
+          visitorType="line"
+          x="days"
+          y="order_num"
+          xname="时间"
+          yname="订单数"
+          id="visitor1"
+          width="1000"
+        ></visitor-pie>
+      </el-tab-pane>
+      <el-tab-pane label="每月交易额走势" name="priceStatistic">
+        <visitor-pie
+          :datas="priceStatistic"
+          visitorType="interval"
+          x="months"
+          y="price"
+          xname="时间"
+          yname="金额"
+          id="visitor2"
+          width="1000"
+        ></visitor-pie>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -76,7 +101,8 @@ import Statistic from '../components/Statistic.vue'
 import {
   getTodayStatistic,
   getMonthStatistic,
-  getOrderStatistic
+  getOrderStatistic,
+  getPriceStatistic
 } from '../request/api'
 
 export default {
@@ -91,7 +117,9 @@ export default {
       ],
       todayStatistic: {},
       monthStatistic: {},
-      orderStatistic: []
+      orderStatistic: [],
+      priceStatistic: [],
+      activeName: 'orderStatistic'
     }
   },
   components: {
@@ -114,6 +142,13 @@ export default {
     }).then(res => {
       this.orderStatistic = res.reverse()
     })
+    getPriceStatistic({
+      m: 'statistic',
+      a: 'getPriceStatistic',
+      months: 10
+    }).then(res => {
+      this.priceStatistic = res.reverse()
+    })
   }
 }
 </script>
@@ -124,6 +159,13 @@ export default {
 }
 .statistic-box {
   padding-bottom: 20px;
+}
+.data-statistics {
+  margin: 0 90px 50px 90px;
+}
+#visitor1,
+#visitor2 {
+  padding-left: 25px;
 }
 </style>
 
