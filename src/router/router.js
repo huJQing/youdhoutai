@@ -4,14 +4,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //页面引入
-import login from '../pages/login.vue'
-import manage from '../pages/manage.vue'
-import home from '../pages/home.vue'
-import userInfo from '../pages/userInfo.vue'
-import orderInfo from '../pages/orderInfo.vue'
-import transactionInfo from '../pages/transactionInfo.vue'
-import goodsInfo from '../pages/goodsInfo.vue'
-import commentInfo from '../pages/commentInfo.vue'
+const login = r => require.ensure([], () => r(require('@/pages/login')), 'login')
+const manage = r => require.ensure([], () => r(require('@/pages/manage')), 'manage')
+const home = r => require.ensure([], () => r(require('@/pages/home')), 'home')
+const userInfo = r => require.ensure([], () => r(require('@/pages/userInfo')), 'userInfo')
+const orderInfo = r => require.ensure([], () => r(require('@/pages/orderInfo')), 'orderInfo')
+const transactionInfo = r => require.ensure([], () => r(require('@/pages/transactionInfo')), 'transactionInfo')
+const goodsInfo = r => require.ensure([], () => r(require('@/pages/goodsInfo')), 'goodsInfo')
+const commentInfo = r => require.ensure([], () => r(require('@/pages/commentInfo')), 'commentInfo')
 
 const routes = [
   { path: '/', redirect: '/login' },

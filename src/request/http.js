@@ -11,8 +11,7 @@ import router from '../router/router.js'
 axios.defaults.timeout = 10000
 
 // post请求头
-axios.defaults.headers.post['Content-Type'] =
-  'application/x-www-form-urlencoded;charset=UTF-8'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 // 允许携带cookie
 axios.defaults.withCredentials = true
@@ -33,18 +32,18 @@ axios.interceptors.response.use(
         // 401: 未登录
         // 未登录则跳转登录页面，并携带当前页面的路径
         case 401:
-          router.push({ path: '/' })
+          router.push({ path: '/login' })
           break
         // 登录过期对用户进行提示
         // 跳转登录页面
         case 403:
           Message.error('登录过期，请重新登录')
-          router.push({ path: '/' })
+          router.push({ path: '/login' })
           break
         // 404请求不存在
         case 404:
           Message.error('网络请求不存在')
-          router.push({ path: '/' })
+          router.push({ path: '/login' })
           break
         // 其他错误，直接抛出错误提示
         default:

@@ -7,8 +7,6 @@
         <el-menu
           :default-active="defaultActive"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#151f33"
           text-color="#fff"
           active-text-color="#4BCCFF"
@@ -60,14 +58,7 @@ export default {
       return this.$route.path.replace('/', '')
     }
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      window.console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      window.console.log(key, keyPath)
-    }
-  }
+  methods: {}
 }
 </script>
 

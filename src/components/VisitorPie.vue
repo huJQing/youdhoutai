@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     structureLineVisitor(datas) {
-      window.console.log(datas)
       this.chart && this.chart.destroy()
       const data = datas
       this.chart = new G2.Chart({
@@ -88,7 +87,6 @@ export default {
       this.chart.render()
     },
     structureIntervalVisitor(datas) {
-      window.console.log(datas)
       this.chart && this.chart.destroy()
       const data = datas
       this.chart = new G2.Chart({
@@ -105,7 +103,6 @@ export default {
       y[this.y] = {
         alias: this.yname
       }
-      window.console.log(x)
       this.chart.source(data, x, y)
       this.chart.interval().position(this.x + '*' + this.y)
       this.chart.render()

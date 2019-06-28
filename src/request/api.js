@@ -9,12 +9,10 @@ const url = '/api'
 export const login = p => post(url, p)
 
 /*获取当日数据统计*/
-export const getTodayStatistic = () =>
-  post(url, { m: 'statistic', a: 'todayStatistic' })
+export const getTodayStatistic = () => post(url, { m: 'statistic', a: 'todayStatistic' })
 
 /*获取本月数据统计*/
-export const getMonthStatistic = () =>
-  post(url, { m: 'statistic', a: 'monthStatistic' })
+export const getMonthStatistic = () => post(url, { m: 'statistic', a: 'monthStatistic' })
 
 /*获取每日订单数据统计*/
 export const getOrderStatistic = p => post(url, p)

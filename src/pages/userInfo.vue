@@ -147,17 +147,14 @@ export default {
     editUserInfo(index, row) {
       this.dialogFormVisible = true
       this.selectTable = row
-      window.console.log(index, row)
     },
     //删除用户
     deleteUser(index, row) {
-      window.console.log(index, row)
       deleteUserInfo({
         m: 'user',
         a: 'deleteUserInfo',
         num: row.num
       }).then(res => {
-        window.console.log(res)
         if (res.status === 'SUCCESS') {
           this.$message.success('删除用户成功！')
           this.dialogFormVisible = false

@@ -147,13 +147,11 @@ export default {
     },
     //删除评论
     deleteComment(index, row) {
-      window.console.log(index, row)
       deleteComment({
         m: 'comment',
         a: 'deleteComment',
         id: row.id
       }).then(res => {
-        window.console.log(res)
         if (res.status === 'SUCCESS') {
           this.$message.success('删除评论成功！')
           this.dialogFormVisible = false

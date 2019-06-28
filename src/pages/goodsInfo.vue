@@ -182,7 +182,6 @@ export default {
         selectedValue: this.listQuery.selectedValue
       })
         .then(res => {
-          window.console.log(res)
           this.listQuery.total = res.total - 0
           this.listQuery.tableData = JSON.parse(res.itemInfo)
           this.loading = false
@@ -213,17 +212,14 @@ export default {
     editUserInfo(index, row) {
       this.dialogFormVisible = true
       this.selectTable = row
-      window.console.log(index, row)
     },
     //删除商品
     deleteItem(index, row) {
-      window.console.log(index, row)
       deleteItem({
         m: 'item',
         a: 'deleteItem',
         id: row.id
       }).then(res => {
-        window.console.log(res)
         if (res.status == 'SUCCESS') {
           this.$message.success('删除商品成功！')
           this.dialogFormVisible = false
@@ -247,7 +243,6 @@ export default {
         type: this.selectTable.type,
         description: this.selectTable.description
       }).then(res => {
-        window.console.log(res)
         if (res.status === 'SUCCESS') {
           this.$message.success('保存商品信息成功！')
           this.dialogFormVisible = false

@@ -132,7 +132,6 @@ export default {
       this.todayStatistic = res
     })
     getMonthStatistic().then(res => {
-      window.console.log(res)
       this.monthStatistic = res
     })
     getOrderStatistic({

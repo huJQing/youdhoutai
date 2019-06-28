@@ -175,7 +175,6 @@ export default {
         selectedValue: this.listQuery.selectedValue
       })
         .then(res => {
-          window.console.log(res)
           this.listQuery.total = res.total - 0
           this.listQuery.tableData = JSON.parse(res.orderInfo)
           this.loading = false
@@ -206,17 +205,14 @@ export default {
     editUserInfo(index, row) {
       this.dialogFormVisible = true
       this.selectTable = row
-      window.console.log(index, row)
     },
     //取消订单
     deleteOrder(index, row) {
-      window.console.log(index, row)
       deleteOrder({
         m: 'order',
         a: 'deleteOrder',
         id: row.id
       }).then(res => {
-        window.console.log(res)
         if (res.status == 'SUCCESS') {
           this.$message.success('取消订单成功，红包已退回发单者账户')
           this.dialogFormVisible = false
