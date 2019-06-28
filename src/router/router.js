@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //页面引入
+import login from '../pages/login.vue'
 import manage from '../pages/manage.vue'
 import home from '../pages/home.vue'
 import userInfo from '../pages/userInfo.vue'
@@ -13,7 +14,11 @@ import goodsInfo from '../pages/goodsInfo.vue'
 import commentInfo from '../pages/commentInfo.vue'
 
 const routes = [
-  { path: '/', redirect: '/manage' },
+  { path: '/', redirect: '/login' },
+  {
+    path: '/login',
+    component: login
+  },
   {
     path: '/manage',
     component: manage,

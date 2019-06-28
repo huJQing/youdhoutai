@@ -5,6 +5,9 @@ import { post } from './http'
 
 const url = '/api'
 
+/*登录*/
+export const login = p => post(url, p)
+
 /*获取当日数据统计*/
 export const getTodayStatistic = () =>
   post(url, { m: 'statistic', a: 'todayStatistic' })
